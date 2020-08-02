@@ -22,37 +22,25 @@ const productsController = {
                 responseResult.error(res, error);
             })
     },
-    // getProductById: (req, res) => {
-    //     productsModel.getProductById(req.params)
-    //         .then((result) => {
-    //             responseResult.getSuccess(res, result)
-    //             // res.status(200).json(data)
-    //         })
-    //         .catch((error) => {
-    //             responseResult.error(res, error)
-    //         })
-    // },
+
     searchProductByName: (req, res) => {
         productsModel.searchProductByName(req.query.name)
-            .then((data) => {
-                responseResult.searchSuccess(res, data);
+            .then((result) => {
+                responseResult.searchSuccess(res, result);
             })
             .catch((error) => {
                 responseResult.error(res, error);
             })
     },
-    // searchProductByName: (req, res) => {
-    //     productsModel.searchProductByName(req.query.name)
-    //         .then((result) => {
-    //             res.status(200).json(result);
-    //             // res.json(result);
-    //             // responseResult.getSuccess(res, result)
-    //         })
-    //         .catch((error) => {
-    //             res.status(500).json(error)
-    //         });
-    // },
-
+    showProductSorted: (_, res) => {
+        productsModel.showProductSorted()
+            .then((result) => {
+                responseResult.getSuccess(res, result);
+            })
+            .catch((error) => {
+                responseResult.error(res, error);
+            })
+    },
     //UPDATE METHOD
     updateProduct: (req, res) => {
         productsModel.updateProduct(req.body, req.params)

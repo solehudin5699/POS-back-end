@@ -7,8 +7,8 @@ productsRouter.post('/add', productsController.postProduct);
 
 //Read method
 productsRouter.get('/', productsController.getAllProducts);
-// productsRouter.get('/:id', productsController.getProductById);
 productsRouter.get('/search', productsController.searchProductByName);
+productsRouter.get('/sort', productsController.showProductSorted);
 
 
 //Update method

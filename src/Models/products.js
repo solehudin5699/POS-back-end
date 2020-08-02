@@ -30,22 +30,22 @@ const productsModel = {
             })
         })
     },
-    // getProductById: (params) => {
-    //     return new Promise((resolve, reject) => {
-    //         const { id } = params;
-    //         let getProductsQuery = "Select * FROM products_table WHERE category_id= ? ";
-    //         dbConnect.query(getProductsQuery, [id], (error, result) => {
-    //             if (!error) {
-    //                 resolve(result);
-    //             } else {
-    //                 reject(error);
-    //             }
-    //         })
-    //     })
-    // },
-    searchProductByName: (data) => {
+    showProductSorted: () => {
         return new Promise((resolve, reject) => {
-            let getProductsQuery = `SELECT * FROM products_table WHERE product_name LIKE '%${data}%'`;
+            let sortQuery = `SELECT category_table.category_name, products_table.product_name, products_table.product_price, products_table.product_stock, products_table.create_date FROM products_table JOIN category_table ON products_table.category_id=category_table.category_id ORDER BY category_table.category_name ASC, products_table.product_name ASC`;
+            dbConnect.query(sortQuery, (error, result) => {
+                if (!error) {
+                    resolve(result)
+                } else {
+                    reject(error)
+                }
+            })
+        })
+    },
+
+    searchProductByName: (name) => {
+        return new Promise((resolve, reject) => {
+            let getProductsQuery = `SELECT * FROM products_table WHERE product_name LIKE '%${name}%'`;
             dbConnect.query(getProductsQuery, (error, result) => {
                 if (!error) {
                     resolve(result);
@@ -59,10 +59,10 @@ const productsModel = {
     //UPDATE METHOD
     updateProduct: (body, params) => {
         return new Promise((resolve, reject) => {
-            const { name, price, category_id } = body;
+            const { name, price, stock, image, category_id } = body;
             const { id } = params;
-            let updateQuery = "UPDATE products_table SET product_name=?, product_price=?, category_id=? WHERE product_id=?";
-            dbConnect.query(updateQuery, [name, price, category_id, id], (error, result) => {
+            let updateQuery = "UPDATE products_table SET product_name=?, product_price=?, product_stock=?, product_image=?, category_id=? WHERE product_id=?";
+            dbConnect.query(updateQuery, [name, price, stock, image, category_id, id], (error, result) => {
                 if (!error) {
                     resolve(result);
                 } else {
