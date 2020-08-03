@@ -21,19 +21,26 @@ const responseResult = {
     },
 
     searchSuccess: (res, result) => {
-        const responseObject = {
-            success: true,
-            status: 200,
-            listProduct: result,
-        };
+        let responseObject;
+        if (result.length == 0) {
+            responseObject = {
+                response: "Data is not found"
+            }
+        } else {
+            responseObject = {
+                success: true,
+                status: 200,
+                listProduct: result,
+            };
+        }
         res.json(responseObject);
     },
 
-    updateSuccess: (res, statusResponse) => {
+    updateSuccess: (res, updatedProduct) => {
         const responseObject = {
             success: true,
             status: 200,
-            updateResponse: statusResponse
+            updatedProduct: updatedProduct
         };
         res.json(responseObject);
     },

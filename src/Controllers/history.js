@@ -44,8 +44,6 @@ const historyController = {
         historyModel.deleteHistory(req.params)
             .then((result) => {
                 res.status(200).json(result)
-                // res.json(result);
-                // responseResult.deleteSuccess(res, result)
             })
             .catch((error) => {
                 res.status(500).json(error)

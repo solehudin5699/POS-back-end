@@ -30,9 +30,10 @@ const productsModel = {
             })
         })
     },
+    // category_table.category_name ASC, 
     showProductSorted: () => {
         return new Promise((resolve, reject) => {
-            let sortQuery = `SELECT category_table.category_name, products_table.product_name, products_table.product_price, products_table.product_stock, products_table.create_date FROM products_table JOIN category_table ON products_table.category_id=category_table.category_id ORDER BY category_table.category_name ASC, products_table.product_name ASC`;
+            let sortQuery = "SELECT category_table.category_name, products_table.product_name, products_table.product_price, products_table.product_stock, products_table.create_date FROM products_table JOIN category_table ON products_table.category_id=category_table.category_id ORDER BY category_table.category_name ASC, products_table.product_name ASC, products_table.product_price";
             dbConnect.query(sortQuery, (error, result) => {
                 if (!error) {
                     resolve(result)

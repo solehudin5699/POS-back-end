@@ -45,8 +45,16 @@ const productsController = {
     updateProduct: (req, res) => {
         productsModel.updateProduct(req.body, req.params)
             .then((result) => {
-                // res.json(result)
-                responseResult.updateSuccess(res, result);
+                if (result.affectedRows !== 0) {
+                    const updatedProduct = {
+                        ...req.body
+                    };
+                    responseResult.updateSuccess(res, updatedProduct);
+                } else {
+                    res.json({
+                        response: `product_id =${req.params.id} is not found`
+                    })
+                }
             })
             .catch((error) => {
                 responseResult.error(res, error);
