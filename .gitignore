@@ -1,5 +1,7 @@
 #Node Modules Folder
 /node_modules
-
+#ANOTHER FOLDER
+/public
+/.vscode
 #Environment
 /.env

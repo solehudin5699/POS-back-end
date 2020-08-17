@@ -23,7 +23,7 @@ const productsModel = {
   addProduct: (file, body) => {
     return new Promise((resolve, reject) => {
       const { id, name, price, stock, category_id } = body;
-      const imageURI = "http://localhost:1000/images/" + file.filename;
+      const imageURI = `/images/${file.filename}`;
       let postQuery = `INSERT INTO products_table SET product_id=${id}, product_name='${name}', product_price=${price},product_stock=${stock},product_image='${imageURI}',category_id=${category_id}`;
       dbConnect.query(postQuery, (error, result) => {
         if (!error) {
