@@ -1,0 +1,7 @@
+{
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "typescript.format.semicolons": "insert",
+    "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
+    "typescript.format.insertSpaceAfterSemicolonInForStatements": false
+}
