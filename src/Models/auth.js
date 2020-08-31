@@ -49,7 +49,7 @@ const authModel = {
     return new Promise((resolve, reject) => {
       const { username, level_id } = body;
       const loginQuery =
-        "SELECT username, password, level_id FROM users WHERE username=? AND level_id=?";
+        "SELECT user_id, name, username, password, level_id FROM users WHERE username=? AND level_id=?";
       dbConnect.query(loginQuery, [username, level_id], (err, data) => {
         // dbConnect.query(loginQuery, body.username, (err, data) => {
         if (err) {
@@ -60,7 +60,7 @@ const authModel = {
           bycrypt.compare(body.password, data[0].password, (err, result) => {
             if (result) {
               const { username } = body;
-              const { level_id } = data[0];
+              const { user_id, name, level_id } = data[0];
               const payload = {
                 username,
                 level_id,
@@ -77,7 +77,7 @@ const authModel = {
                 expiresIn: "10h",
               });
               const msg = "Login Succes";
-              resolve({ msg, token });
+              resolve({ msg, user_id, name, level_id,token });
             }
             if (!result) {
               reject({ msg: "Wrong Password" });

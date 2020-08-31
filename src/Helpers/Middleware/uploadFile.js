@@ -45,8 +45,17 @@ const uploadController = {
         res.json({
           msg: err,
         });
-      } else {
+      } else if (!req.file) {
         next();
+      } else {
+        try {
+          req.body.product_image = `${process.env.SERVER}/images/${req.file.filename}`;
+          next();
+        } catch (err) {
+          res.json({
+            msg: err,
+          });
+        }
       }
     });
   },

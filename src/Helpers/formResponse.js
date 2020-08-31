@@ -1,9 +1,8 @@
 const responseResult = {
-  postSuccess: (res, statusResponse, newData) => {
+  postSuccess: (res, newData) => {
     const responseObject = {
       success: true,
       status: 200,
-      postResponse: statusResponse,
       newData: {
         ...newData,
       },
@@ -77,19 +76,24 @@ const responseResult = {
     const { name, sortBy, orderBy, page, limit } = req.query;
     const currentPage = Number(page);
     const numLimit = Number(limit);
+    const lengthDataAll = data.dataAll.length;
+    const totalPage = Math.ceil(lengthDataAll / numLimit);
     const prevPage =
       currentPage == 1
         ? ""
         : `/products/search?name=${name}&sortBy=${sortBy}&orderBy=${orderBy}&limit=${numLimit}&page=${
             currentPage - 1
           }`;
-    const nextPage = `/products/search?name=${name}&sortBy=${sortBy}&orderBy=${orderBy}&limit=${numLimit}&page=${
-      currentPage + 1
-    }`;
+    const nextPage =
+      currentPage < totalPage
+        ? `/products/search?name=${name}&sortBy=${sortBy}&orderBy=${orderBy}&limit=${numLimit}&page=${
+            currentPage + 1
+          }`
+        : "";
     const responseObject = {
       success: true,
       status: 200,
-      data,
+      data: data.data,
       pageInfo: {
         currentPage,
         limit: numLimit,

@@ -20,11 +20,10 @@ const productsModel = {
       );
     });
   },
-  addProduct: (file, body) => {
+  addProduct: (body) => {
     return new Promise((resolve, reject) => {
-      const { id, name, price, stock, category_id } = body;
-      const imageURI = `/images/${file.filename}`;
-      let postQuery = `INSERT INTO products_table SET product_id=${id}, product_name='${name}', product_price=${price},product_stock=${stock},product_image='${imageURI}',category_id=${category_id}`;
+      const { name, price, product_image, category_id } = body;
+      let postQuery = `INSERT INTO products_table SET product_name='${name}', product_price=${price},product_image='${product_image}',category_id=${category_id}`;
       dbConnect.query(postQuery, (error, result) => {
         if (!error) {
           resolve(result);
@@ -80,38 +79,65 @@ const productsModel = {
   searchAndPaginate: (query) => {
     return new Promise((resolve, reject) => {
       const { name, sortBy, orderBy, page, limit } = query;
-      offset = (page - 1) * limit;
-      const queryString = `SELECT products_table.product_id, products_table.product_name, products_table.product_price, products_table.product_stock, products_table.create_date, category_table.category_name FROM products_table JOIN category_table ON products_table.category_id=category_table.category_id WHERE products_table.product_name LIKE '%${name}%' ORDER BY products_table.${sortBy} ${orderBy} LIMIT ${Number(
+      const offset = (page - 1) * limit;
+      const checkData = `SELECT * FROM products_table`;
+      const queryString = `SELECT products_table.product_id, products_table.product_name, products_table.product_price, products_table.product_stock,products_table.product_image, products_table.create_date, category_table.category_name FROM products_table JOIN category_table ON products_table.category_id=category_table.category_id WHERE products_table.product_name LIKE '%${name}%' ORDER BY products_table.${sortBy} ${orderBy} LIMIT ${Number(
         limit
       )} OFFSET ${offset}`;
-      dbConnect.query(queryString, (err, data) => {
-        if (!err) {
-          resolve(data);
-        } else {
+      dbConnect.query(checkData, (err, dataAll) => {
+        if (err) {
           reject(err);
+        } else {
+          dbConnect.query(queryString, (err, data) => {
+            if (!err) {
+              resolve({ dataAll, data });
+            } else {
+              reject(err);
+            }
+          });
         }
       });
+      // dbConnect.query(queryString, (err, data) => {
+      //   if (!err) {
+      //     resolve(data);
+      //   } else {
+      //     reject(err);
+      //   }
+      // });
     });
   },
 
   //UPDATE METHOD
+  // updateProduct: (body, params) => {
+  //   return new Promise((resolve, reject) => {
+  //     const { name, price, stock, image, category_id } = body;
+  //     const { id } = params;
+  //     let updateQuery =
+  //       "UPDATE products_table SET product_name=?, product_price=?, product_stock=?, product_image=?, category_id=? WHERE product_id=?";
+  //     dbConnect.query(
+  //       updateQuery,
+  //       [name, price, stock, image, category_id, id],
+  //       (error, result) => {
+  //         if (!error) {
+  //           resolve(result);
+  //         } else {
+  //           reject(error);
+  //         }
+  //       }
+  //     );
+  //   });
+  // },
   updateProduct: (body, params) => {
     return new Promise((resolve, reject) => {
-      const { name, price, stock, image, category_id } = body;
       const { id } = params;
-      let updateQuery =
-        "UPDATE products_table SET product_name=?, product_price=?, product_stock=?, product_image=?, category_id=? WHERE product_id=?";
-      dbConnect.query(
-        updateQuery,
-        [name, price, stock, image, category_id, id],
-        (error, result) => {
-          if (!error) {
-            resolve(result);
-          } else {
-            reject(error);
-          }
+      let updateQuery = `UPDATE products_table SET ? WHERE product_id=${id}`;
+      dbConnect.query(updateQuery, body, (error, result) => {
+        if (!error) {
+          resolve(result);
+        } else {
+          reject(error);
         }
-      );
+      });
     });
   },
 

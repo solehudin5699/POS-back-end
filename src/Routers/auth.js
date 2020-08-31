@@ -13,6 +13,9 @@ authRouter.post(
   authController.registration
 );
 //PUBLIC
-authRouter.get("/login", authController.login);
+authRouter.post("/login", authController.login);
+authRouter.post("/validate", checkToken.allUsers, (req, res) => {
+  res.json({ status:200,token: true });
+});
 
 module.exports = authRouter;

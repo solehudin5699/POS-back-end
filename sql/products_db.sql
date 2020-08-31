@@ -7,9 +7,11 @@
 -- Versi server: 10.4.13-MariaDB
 -- Versi PHP: 7.4.7
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE
+= "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone
+= "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -27,16 +29,22 @@ SET time_zone = "+00:00";
 -- Struktur dari tabel `category_table`
 --
 
-CREATE TABLE `category_table` (
-  `category_id` int(11) NOT NULL,
-  `category_name` varchar(255) NOT NULL
+CREATE TABLE `category_table`
+(
+  `category_id` int
+(11) NOT NULL,
+  `category_name` varchar
+(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `category_table`
 --
 
-INSERT INTO `category_table` (`category_id`, `category_name`) VALUES
+INSERT INTO `category_table` (`
+category_id`,
+`category_name
+`) VALUES
 (1, 'Makanan Khas Jawa Barat'),
 (2, 'Makanan Khas Banten');
 
@@ -46,21 +54,31 @@ INSERT INTO `category_table` (`category_id`, `category_name`) VALUES
 -- Struktur dari tabel `history_table`
 --
 
-CREATE TABLE `history_table` (
-  `order_id` int(11) NOT NULL,
-  `invoices` varchar(12) NOT NULL,
+CREATE TABLE `history_table`
+(
+  `order_id` int
+(11) NOT NULL,
+  `invoices` varchar
+(12) NOT NULL,
   `cashier` text NOT NULL,
-  `order_dates` timestamp NOT NULL DEFAULT current_timestamp(),
-  `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `amount` int(11) NOT NULL
+  `order_dates` timestamp NOT NULL DEFAULT current_timestamp
+(),
+  `product_id` int
+(11) NOT NULL,
+  `quantity` int
+(11) NOT NULL,
+  `amount` int
+(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `history_table`
 --
 
-INSERT INTO `history_table` (`order_id`, `invoices`, `cashier`, `order_dates`, `product_id`, `quantity`, `amount`) VALUES
+INSERT INTO `history_table` (`
+order_id`,
+`invoices
+`, `cashier`, `order_dates`, `product_id`, `quantity`, `amount`) VALUES
 (2, '222', 'Soleh', '2020-08-01 17:00:00', 2, 3, 30000),
 (3, '99', 'Name Cashier', '2020-08-02 16:17:12', 1, 11, 10000);
 
@@ -70,9 +88,12 @@ INSERT INTO `history_table` (`order_id`, `invoices`, `cashier`, `order_dates`, `
 -- Struktur dari tabel `level_users`
 --
 
-CREATE TABLE `level_users` (
-  `level_id` int(11) NOT NULL,
-  `level_name` varchar(255) NOT NULL
+CREATE TABLE `level_users`
+(
+  `level_id` int
+(11) NOT NULL,
+  `level_name` varchar
+(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -81,19 +102,28 @@ CREATE TABLE `level_users` (
 -- Struktur dari tabel `order_table`
 --
 
-CREATE TABLE `order_table` (
-  `order_id` int(11) NOT NULL,
-  `product_order` varchar(255) NOT NULL,
-  `quality_order` varchar(255) NOT NULL,
-  `total_price` int(11) NOT NULL,
-  `order_date` timestamp NOT NULL DEFAULT current_timestamp()
+CREATE TABLE `order_table`
+(
+  `order_id` int
+(11) NOT NULL,
+  `product_order` varchar
+(255) NOT NULL,
+  `quality_order` varchar
+(255) NOT NULL,
+  `total_price` int
+(11) NOT NULL,
+  `order_date` timestamp NOT NULL DEFAULT current_timestamp
+()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `order_table`
 --
 
-INSERT INTO `order_table` (`order_id`, `product_order`, `quality_order`, `total_price`, `order_date`) VALUES
+INSERT INTO `order_table` (`
+order_id`,
+`product_order
+`, `quality_order`, `total_price`, `order_date`) VALUES
 (1, 'Angeun Lada,Cireng,Batagor dan Siomay', '3,1,1', 0, '2020-08-10 06:18:08'),
 (2, 'Cireng', '1', 0, '2020-08-10 06:26:56'),
 (3, 'Emping Melinjo', '1', 0, '2020-08-10 06:31:13'),
@@ -135,22 +165,36 @@ INSERT INTO `order_table` (`order_id`, `product_order`, `quality_order`, `total_
 -- Struktur dari tabel `products_table`
 --
 
-CREATE TABLE `products_table` (
-  `product_id` int(11) NOT NULL,
-  `product_name` varchar(255) NOT NULL,
-  `product_price` decimal(10,0) NOT NULL,
-  `product_stock` int(11) NOT NULL,
-  `product_image` varchar(255) NOT NULL,
-  `create_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `change_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `category_id` int(11) NOT NULL
+CREATE TABLE `products_table`
+(
+  `product_id` int
+(11) NOT NULL,
+  `product_name` varchar
+(255) NOT NULL,
+  `product_price` decimal
+(10,0) NOT NULL,
+  `product_stock` int
+(11) NOT NULL,
+  `product_image` varchar
+(255) NOT NULL,
+  `create_date` timestamp NOT NULL DEFAULT current_timestamp
+(),
+  `change_at` timestamp NOT NULL DEFAULT current_timestamp
+() ON
+UPDATE current_timestamp(),
+  `category_id
+` int
+(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `products_table`
 --
 
-INSERT INTO `products_table` (`product_id`, `product_name`, `product_price`, `product_stock`, `product_image`, `create_date`, `change_at`, `category_id`) VALUES
+INSERT INTO `products_table` (`
+product_id`,
+`product_name
+`, `product_price`, `product_stock`, `product_image`, `create_date`, `change_at`, `category_id`) VALUES
 (1, 'Cireng', '12000', 50, 'https://moondoggiesmusic.com/wp-content/uploads/2019/03/Cireng.jpg', '2020-08-13 13:35:29', '2020-08-13 13:35:29', 1),
 (2, 'Hayam Bakakak', '25000', 100, 'https://moondoggiesmusic.com/wp-content/uploads/2019/03/media-bogor-kuliner-grand-savero-ayam-bakar-madu.jpg', '2020-08-13 13:37:25', '2020-08-13 13:37:25', 1),
 (3, 'Leumeung', '15000', 30, 'http://makananoleholeh.com/wp-content/uploads/2017/05/Leumeung-Makanan-Khas-Banten.jpg', '2020-08-13 13:38:17', '2020-08-13 13:38:17', 2),
@@ -165,21 +209,32 @@ INSERT INTO `products_table` (`product_id`, `product_name`, `product_price`, `pr
 -- Struktur dari tabel `users`
 --
 
-CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `level_id` int(11) NOT NULL,
-  `registered_date` timestamp NOT NULL DEFAULT current_timestamp()
+CREATE TABLE `users`
+(
+  `user_id` int
+(11) NOT NULL,
+  `name` varchar
+(255) NOT NULL,
+  `email` varchar
+(255) NOT NULL,
+  `username` varchar
+(255) NOT NULL,
+  `password` varchar
+(255) NOT NULL,
+  `level_id` int
+(11) NOT NULL,
+  `registered_date` timestamp NOT NULL DEFAULT current_timestamp
+()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`user_id`, `name`, `email`, `username`, `password`, `level_id`, `registered_date`) VALUES
+INSERT INTO `users` (`
+user_id`,
+`name
+`, `email`, `username`, `password`, `level_id`, `registered_date`) VALUES
 (1, 'Name 1', 'name1@surel.com', 'nameone', '$2b$10$fvlyujW27/toKMNCgMQiHepP/zvyUKZdfHKnOJ/L/YKSPAnwUZlgK', 1, '2020-08-14 01:38:39'),
 (2, 'Name 2', 'name2@surel.com', 'nametwo', '$2b$10$XNeJNtjLliLhwKTFmhuMQ.Ywcqtp1ZMnjiy4/a.eqldLoY2pmTvGG', 2, '2020-08-14 01:39:33'),
 (3, 'Name 3', 'name3@surel.com', 'namethree', '$2b$10$p.akV89jj/ZJSOAdWv2jR.7/imXqQAt6GaALM/ryjEETjGk7oqYfm', 2, '2020-08-14 01:39:53'),
@@ -196,19 +251,22 @@ INSERT INTO `users` (`user_id`, `name`, `email`, `username`, `password`, `level_
 -- Indeks untuk tabel `history_table`
 --
 ALTER TABLE `history_table`
-  ADD PRIMARY KEY (`order_id`);
+ADD PRIMARY KEY
+(`order_id`);
 
 --
 -- Indeks untuk tabel `order_table`
 --
 ALTER TABLE `order_table`
-  ADD PRIMARY KEY (`order_id`);
+ADD PRIMARY KEY
+(`order_id`);
 
 --
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+ADD PRIMARY KEY
+(`user_id`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -218,19 +276,22 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `history_table`
 --
 ALTER TABLE `history_table`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `order_id` int
+(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `order_table`
 --
 ALTER TABLE `order_table`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `order_id` int
+(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int
+(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

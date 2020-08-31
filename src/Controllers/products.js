@@ -8,7 +8,7 @@ const productsController = {
     productsModel
       .postProduct(req.body)
       .then((result) => {
-        responseResult.postSuccess(res, result, req.body);
+        responseResult.postSuccess(res, req.body);
       })
       .catch((error) => {
         responseResult.error(res, error);
@@ -17,11 +17,9 @@ const productsController = {
   //post with upload file
   addProduct: (req, res) => {
     productsModel
-      .addProduct(req.file, req.body)
+      .addProduct(req.body)
       .then((result) => {
-        res.json({
-          data: result,
-        });
+        responseResult.postSuccess(res, req.body);
       })
       .catch((error) => {
         responseResult.error(res, error);
@@ -70,18 +68,38 @@ const productsController = {
       });
   },
   //UPDATE METHOD
+  // updateProduct: (req, res) => {
+  //   productsModel
+  //     .updateProduct(req.body, req.params)
+  //     .then((result) => {
+  //       if (result.affectedRows !== 0) {
+  //         const updatedProduct = {
+  //           ...req.body,
+  //         };
+  //         responseResult.updateSuccess(res, updatedProduct);
+  //       } else {
+  //         res.json({
+  //           response: `product_id =${req.params.id} is not found`,
+  //         });
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       responseResult.error(res, error);
+  //     });
+  // },
   updateProduct: (req, res) => {
     productsModel
       .updateProduct(req.body, req.params)
       .then((result) => {
         if (result.affectedRows !== 0) {
-          const updatedProduct = {
+          const detailUpdate = {
             ...req.body,
           };
-          responseResult.updateSuccess(res, updatedProduct);
+          console.log(result);
+          responseResult.updateSuccess(res, detailUpdate);
         } else {
           res.json({
-            response: `product_id =${req.params.id} is not found`,
+            response: `product_id = ${req.params.id} is not found`,
           });
         }
       })

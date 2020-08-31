@@ -5,6 +5,7 @@ const checkToken = {
     const bearerToken = req.header("x-access-token");
     if (!bearerToken) {
       res.json({
+        status:500,
         msg: "Please Login First",
       });
     }
@@ -15,6 +16,7 @@ const checkToken = {
       next();
     } catch (err) {
       res.json({
+        status:500,
         msg: "Token is Wrong",
       });
     }
@@ -23,6 +25,7 @@ const checkToken = {
     const bearerToken = req.header("x-access-token");
     if (!bearerToken) {
       res.json({
+        status:500,
         msg: "Please Login First",
       });
     }
@@ -39,6 +42,7 @@ const checkToken = {
         next();
       } catch (err) {
         res.json({
+          status:500,
           msg: "Token is wrong",
         });
       }
