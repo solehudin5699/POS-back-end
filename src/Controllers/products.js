@@ -8,7 +8,7 @@ const productsController = {
     productsModel
       .postProduct(req.body)
       .then((result) => {
-        responseResult.postSuccess(res, req.body);
+        responseResult.success(res, req.body);
       })
       .catch((error) => {
         responseResult.error(res, error);
@@ -19,7 +19,7 @@ const productsController = {
     productsModel
       .addProduct(req.body)
       .then((result) => {
-        responseResult.postSuccess(res, req.body);
+        responseResult.success(res, req.body);
       })
       .catch((error) => {
         responseResult.error(res, error);
@@ -30,7 +30,7 @@ const productsController = {
     productsModel
       .getAllProducts()
       .then((result) => {
-        responseResult.getSuccess(res, result);
+        responseResult.success(res, result);
       })
       .catch((error) => {
         responseResult.error(res, error);
@@ -41,7 +41,7 @@ const productsController = {
     productsModel
       .searchProductByName(req.query.name)
       .then((result) => {
-        responseResult.searchSuccess(res, result);
+        responseResult.success(res, result);
       })
       .catch((error) => {
         responseResult.error(res, error);
@@ -61,7 +61,7 @@ const productsController = {
     productsModel
       .sortProduct(req.query)
       .then((result) => {
-        responseResult.getSuccess(res, result);
+        responseResult.success(res, result);
       })
       .catch((error) => {
         responseResult.error(res, error);
@@ -96,11 +96,13 @@ const productsController = {
             ...req.body,
           };
           console.log(result);
-          responseResult.updateSuccess(res, detailUpdate);
+          responseResult.success(res, detailUpdate);
         } else {
-          res.json({
-            response: `product_id = ${req.params.id} is not found`,
-          });
+          let msg = `product_id = ${req.params.id} is not found`;
+          responseResult.error(res, { msg });
+          // res.json({
+          //   response: `product_id = ${req.params.id} is not found`,
+          // });
         }
       })
       .catch((error) => {
@@ -110,9 +112,9 @@ const productsController = {
   //DELETE METHOD
   deleteProduct: (req, res) => {
     productsModel
-      .deleteProduct(req.params)
+      .deleteProduct(req.params, req.body)
       .then((result) => {
-        responseResult.deleteSuccess(res, result);
+        responseResult.success(res, result);
       })
       .catch((error) => {
         responseResult.error(res, error);

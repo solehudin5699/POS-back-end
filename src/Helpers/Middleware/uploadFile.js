@@ -1,5 +1,6 @@
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 // const { extname } = require("path");
 
 //Disk for save file
@@ -45,11 +46,21 @@ const uploadController = {
         res.json({
           msg: err,
         });
-      } else if (!req.file) {
+      } else if (!req.file && !req.body.imageDelete) {
         next();
+      } else if (req.file && !req.body.imageDelete) {
+        try {
+          req.body.product_image = `/images/${req.file.filename}`;
+          next();
+        } catch (err) {
+          res.json({
+            msg: err,
+          });
+        }
       } else {
         try {
-          req.body.product_image = `${process.env.SERVER}/images/${req.file.filename}`;
+          fs.unlinkSync("public" + req.body.imageDelete);
+          req.body.product_image = `/images/${req.file.filename}`;
           next();
         } catch (err) {
           res.json({

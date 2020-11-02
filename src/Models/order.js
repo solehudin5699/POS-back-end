@@ -14,10 +14,24 @@ const orderModel = {
           if (!error) {
             resolve(result);
           } else {
-            reject(error);
+            reject({ msg: "Failed order." });
           }
         }
       );
+    });
+  },
+  //GET METHOD
+  getAllOrder: () => {
+    return new Promise((resolve, reject) => {
+      let getAllOrderQuery =
+        "SELECT order_table.order_id, order_table.product_order,order_table.quality_order, order_table.total_price, order_table.order_date, users.name FROM order_table JOIN users ON order_table.user_id=users.user_id";
+      dbConnect.query(getAllOrderQuery, (error, result) => {
+        if (!error) {
+          resolve(result);
+        } else {
+          reject({ msg: "Failed." });
+        }
+      });
     });
   },
 };

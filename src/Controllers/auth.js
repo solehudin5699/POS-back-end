@@ -7,7 +7,7 @@ const authController = {
     authModel
       .registration(req.body)
       .then((data) => {
-        responseResult.registSuccess(res, data);
+        responseResult.success(res, data);
       })
       .catch((err) => {
         responseResult.error(res, err);
@@ -17,7 +17,7 @@ const authController = {
     authModel
       .login(req.body)
       .then((data) => {
-        responResult.loginSuccess(res, data);
+        responResult.success(res, data);
       })
       .catch((err) => {
         responResult.error(res, err);

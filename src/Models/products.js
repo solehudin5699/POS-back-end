@@ -1,4 +1,5 @@
 const dbConnect = require("../Configs/dbConnect");
+const fs = require("fs");
 
 const productsModel = {
   //CREATE METHOD
@@ -142,13 +143,18 @@ const productsModel = {
   },
 
   //DELETE METHOD
-  deleteProduct: (params) => {
+  deleteProduct: (params, body) => {
     return new Promise((resolve, reject) => {
       const { id } = params;
       let deleteQuery = "DELETE from products_table WHERE product_id=?";
       dbConnect.query(deleteQuery, [id], (error, result) => {
         if (!error) {
-          resolve(result);
+          try {
+            fs.unlinkSync("public" + body.imageDelete);
+            resolve(result);
+          } catch (err) {
+            reject({ msg: "Error" });
+          }
         } else {
           reject(error);
         }

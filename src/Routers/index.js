@@ -13,9 +13,9 @@ const indexRouter = express.Router();
 //Implementation
 //PRIVATE ROUTE
 indexRouter.use("/products", productsRouter);
-indexRouter.use("/category", checkToken.allUsers, categoryRouter);
-indexRouter.use("/history", checkToken.allUsers, historyRouter);
-indexRouter.use("/order", checkToken.allUsers, orderRouter);
+// indexRouter.use("/category", checkToken.allUsers, categoryRouter);
+// indexRouter.use("/history", checkToken.allUsers, historyRouter);
+indexRouter.use("/order",  orderRouter);
 
 //PUBLIC ROUTE OR PRIVATE ROUTE
 indexRouter.use("/auth", authRouter);

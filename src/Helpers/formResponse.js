@@ -10,6 +10,15 @@ const responseResult = {
     res.json(responseObject);
   },
 
+  success: (res, data) => {
+    const responseObject = {
+      success: true,
+      status: 200,
+      data: data,
+    };
+    res.json(responseObject);
+  },
+
   getSuccess: (res, result) => {
     const responseObject = {
       success: true,

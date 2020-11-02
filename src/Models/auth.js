@@ -11,19 +11,19 @@ const authModel = {
       const checkUsername = "SELECT username FROM users WHERE username=?";
       dbConnect.query(checkUsername, [username], (err, data) => {
         if (err) {
-          reject(err);
+          reject({ msg: "Something is wrong" });
         } else if (data.length) {
           reject({ msg: "Username already registered" });
         } else {
           //DO THIS IF USERNAME IS NOT ALREADY
           bycrypt.genSalt(10, (err, salt) => {
             if (err) {
-              reject(err);
+              reject({ msg: "Something is wrong" });
             }
             const { password } = body;
             bycrypt.hash(password, salt, (err, hashedPassword) => {
               if (err) {
-                reject(err);
+                reject({ msg: "Something is wrong" });
               }
               console.log(hashedPassword);
               const newBody = {
@@ -36,7 +36,7 @@ const authModel = {
                   const msg = "Registration is succes";
                   resolve({ msg });
                 } else {
-                  reject(err);
+                  reject({ msg: "Registration is failed" });
                 }
               });
             });
@@ -53,9 +53,9 @@ const authModel = {
       dbConnect.query(loginQuery, [username, level_id], (err, data) => {
         // dbConnect.query(loginQuery, body.username, (err, data) => {
         if (err) {
-          reject(err);
+          reject({ msg: "Something is wrong" });
         } else if (!data.length) {
-          reject({ msg: "Data not Found" });
+          reject({ msg: "Username is not registered." });
         } else {
           bycrypt.compare(body.password, data[0].password, (err, result) => {
             if (result) {
@@ -77,13 +77,13 @@ const authModel = {
                 expiresIn: "10h",
               });
               const msg = "Login Succes";
-              resolve({ msg, user_id, name, level_id,token });
+              resolve({ msg, user_id, name, level_id, token });
             }
             if (!result) {
               reject({ msg: "Wrong Password" });
             }
             if (err) {
-              reject(err);
+              reject({ msg: "Something is wrong." });
             }
           });
         }
