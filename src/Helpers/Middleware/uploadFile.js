@@ -44,27 +44,21 @@ const uploadController = {
     singleUpload(req, res, (err) => {
       if (err) {
         res.json({
-          msg: err,
+          success: false,
+          status: 500,
+          error: err,
         });
-      } else if (!req.file && !req.body.imageDelete) {
+      } else if (!req.file) {
         next();
-      } else if (req.file && !req.body.imageDelete) {
-        try {
-          req.body.product_image = `/images/${req.file.filename}`;
-          next();
-        } catch (err) {
-          res.json({
-            msg: err,
-          });
-        }
       } else {
         try {
-          fs.unlinkSync("public" + req.body.imageDelete);
           req.body.product_image = `/images/${req.file.filename}`;
           next();
         } catch (err) {
           res.json({
-            msg: err,
+            success: false,
+            status: 500,
+            error: err,
           });
         }
       }

@@ -79,12 +79,20 @@ const productsModel = {
 
   searchAndPaginate: (query) => {
     return new Promise((resolve, reject) => {
-      const { name, sortBy, orderBy, page, limit } = query;
+      const { name, price, time, page, limit, category } = query;
       const offset = (page - 1) * limit;
       const checkData = `SELECT * FROM products_table`;
-      const queryString = `SELECT products_table.product_id, products_table.product_name, products_table.product_price, products_table.product_stock,products_table.product_image, products_table.create_date, category_table.category_name FROM products_table JOIN category_table ON products_table.category_id=category_table.category_id WHERE products_table.product_name LIKE '%${name}%' ORDER BY products_table.${sortBy} ${orderBy} LIMIT ${Number(
-        limit
-      )} OFFSET ${offset}`;
+      let queryString;
+      if (category !== "") {
+        queryString = `SELECT products_table.product_id, products_table.product_name, products_table.product_price, products_table.product_stock,products_table.product_image, products_table.create_date,products_table.category_id, category_table.category_name FROM products_table JOIN category_table ON products_table.category_id=category_table.category_id WHERE products_table.product_name LIKE '%${name}%' AND products_table.category_id=${category} ORDER BY products_table.product_price ${price}, products_table.product_id ${time} LIMIT ${Number(
+          limit
+        )} OFFSET ${offset}`;
+      } else {
+        queryString = `SELECT products_table.product_id, products_table.product_name, products_table.product_price, products_table.product_stock,products_table.product_image, products_table.create_date,products_table.category_id, category_table.category_name FROM products_table JOIN category_table ON products_table.category_id=category_table.category_id WHERE products_table.product_name LIKE '%${name}%' ORDER BY products_table.product_price ${price}, products_table.product_id ${time} LIMIT ${Number(
+          limit
+        )} OFFSET ${offset}`;
+      }
+
       dbConnect.query(checkData, (err, dataAll) => {
         if (err) {
           reject(err);
@@ -98,45 +106,39 @@ const productsModel = {
           });
         }
       });
-      // dbConnect.query(queryString, (err, data) => {
-      //   if (!err) {
-      //     resolve(data);
-      //   } else {
-      //     reject(err);
-      //   }
-      // });
     });
   },
 
-  //UPDATE METHOD
-  // updateProduct: (body, params) => {
-  //   return new Promise((resolve, reject) => {
-  //     const { name, price, stock, image, category_id } = body;
-  //     const { id } = params;
-  //     let updateQuery =
-  //       "UPDATE products_table SET product_name=?, product_price=?, product_stock=?, product_image=?, category_id=? WHERE product_id=?";
-  //     dbConnect.query(
-  //       updateQuery,
-  //       [name, price, stock, image, category_id, id],
-  //       (error, result) => {
-  //         if (!error) {
-  //           resolve(result);
-  //         } else {
-  //           reject(error);
-  //         }
-  //       }
-  //     );
-  //   });
-  // },
   updateProduct: (body, params) => {
     return new Promise((resolve, reject) => {
+      let imgDelete = body.imageDelete;
+      delete body.imageDelete;
       const { id } = params;
       let updateQuery = `UPDATE products_table SET ? WHERE product_id=${id}`;
       dbConnect.query(updateQuery, body, (error, result) => {
         if (!error) {
-          resolve(result);
+          if (imgDelete) {
+            try {
+              fs.unlinkSync("public" + imgDelete);
+              resolve({
+                ...result,
+                id,
+                msg: "Success updating product",
+                deleteOldImg: "Success",
+              });
+            } catch (err) {
+              resolve({
+                ...result,
+                id,
+                msg: "Success updating product",
+                deleteOldImg: "Error",
+              });
+            }
+          } else {
+            resolve(result);
+          }
         } else {
-          reject(error);
+          reject({ msg: "Error updating product" });
         }
       });
     });
@@ -151,12 +153,20 @@ const productsModel = {
         if (!error) {
           try {
             fs.unlinkSync("public" + body.imageDelete);
-            resolve(result);
+            resolve({
+              id,
+              msg: "Success deleting product",
+              deleteImgInServer: "Success",
+            });
           } catch (err) {
-            reject({ msg: "Error" });
+            resolve({
+              id,
+              msg: "Success deleting product",
+              deleteImgInServer: "Error",
+            });
           }
         } else {
-          reject(error);
+          reject({ msg: "Error" });
         }
       });
     });

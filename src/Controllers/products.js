@@ -67,42 +67,30 @@ const productsController = {
         responseResult.error(res, error);
       });
   },
-  //UPDATE METHOD
-  // updateProduct: (req, res) => {
-  //   productsModel
-  //     .updateProduct(req.body, req.params)
-  //     .then((result) => {
-  //       if (result.affectedRows !== 0) {
-  //         const updatedProduct = {
-  //           ...req.body,
-  //         };
-  //         responseResult.updateSuccess(res, updatedProduct);
-  //       } else {
-  //         res.json({
-  //           response: `product_id =${req.params.id} is not found`,
-  //         });
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       responseResult.error(res, error);
-  //     });
-  // },
   updateProduct: (req, res) => {
     productsModel
       .updateProduct(req.body, req.params)
       .then((result) => {
         if (result.affectedRows !== 0) {
-          const detailUpdate = {
-            ...req.body,
-          };
+          let detailUpdate;
+          if (result.deleteOldImg) {
+            detailUpdate = {
+              ...req.body,
+              id: result.id,
+              msg: result.msg,
+              deleteOldImg: result.deleteOldImg,
+            };
+          } else {
+            detailUpdate = {
+              ...req.body,
+              id: req.params.id,
+            };
+          }
           console.log(result);
           responseResult.success(res, detailUpdate);
         } else {
           let msg = `product_id = ${req.params.id} is not found`;
           responseResult.error(res, { msg });
-          // res.json({
-          //   response: `product_id = ${req.params.id} is not found`,
-          // });
         }
       })
       .catch((error) => {

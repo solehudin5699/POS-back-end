@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Nov 2020 pada 07.08
+-- Waktu pembuatan: 18 Nov 2020 pada 09.21
 -- Versi server: 10.4.13-MariaDB
 -- Versi PHP: 7.4.7
 
@@ -87,52 +87,55 @@ CREATE TABLE `order_table` (
   `product_order` varchar(255) NOT NULL,
   `quality_order` varchar(255) NOT NULL,
   `total_price` int(11) NOT NULL,
-  `order_date` timestamp NOT NULL DEFAULT current_timestamp()
+  `order_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `invoices` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `order_table`
 --
 
-INSERT INTO `order_table` (`order_id`, `user_id`, `product_order`, `quality_order`, `total_price`, `order_date`) VALUES
-(94, 6, 'Lepet,Hayam Bakakak,Leumeung,Kue Jojorong', '1,1,1,1', 66000, '2020-10-31 13:35:49'),
-(95, 6, 'Hayam Bakakak,Leumeung', '1,1', 44000, '2020-10-31 13:36:48'),
-(96, 6, 'Cireng,Hayam Bakakak', '1,1', 40700, '2020-10-31 13:39:54'),
-(97, 6, 'Lepet', '1', 11000, '2020-10-31 13:40:51'),
-(98, 6, 'Leumeung', '1', 16500, '2020-10-31 13:45:38'),
-(99, 5, 'Hayam Bakakak,Leumeung,Kue Jojorong', '1,1,1', 55000, '2020-11-01 00:41:47'),
-(100, 5, 'Hayam Bakakak,Leumeung,Kue Jojorong', '1,1,1', 55000, '2020-11-01 00:43:21'),
-(101, 5, 'Hayam Bakakak,Leumeung,Kue Jojorong', '1,1,1', 55000, '2020-11-01 00:45:23'),
-(102, 5, 'Cireng,Hayam Bakakak,Leumeung,Kue Jojorong,Lepet,Kerupuk Melarat', '1,1,1,1,1,1', 90200, '2020-11-01 00:46:13'),
-(103, 5, 'Cireng', '1', 13200, '2020-11-01 00:47:57'),
-(104, 5, 'Hayam Bakakak', '1', 27500, '2020-11-01 01:01:25'),
-(105, 5, 'Hayam Bakakak,Leumeung', '1,1', 44000, '2020-11-01 01:03:34'),
-(106, 5, 'Cireng', '1', 13200, '2020-11-01 02:15:09'),
-(107, 5, 'Hayam Bakakak', '1', 27500, '2020-11-01 02:17:12'),
-(108, 5, 'Hayam Bakakak', '1', 27500, '2020-11-01 02:18:06'),
-(109, 5, 'Kue Jojorong', '1', 11000, '2020-11-01 02:18:15'),
-(110, 5, 'Lepet', '1', 11000, '2020-11-01 02:19:09'),
-(111, 5, 'Hayam Bakakak', '1', 27500, '2020-11-01 02:21:32'),
-(112, 5, 'Leumeung', '1', 16500, '2020-11-01 02:22:39'),
-(113, 5, 'Karedok,Soto Mie', '1,1', 24200, '2020-11-01 02:24:56'),
-(114, 5, 'Hayam Bakakak,Cireng,Leumeung,Kerupuk Melarat,Kue Jojorong,Lepet,Opak,Nasi Timbel,Karedok,Nasi Liwet,Soto Bandung,Soto Mie', '1,1,1,1,1,1,1,1,15,1,1,1', 314600, '2020-11-01 02:31:28'),
-(115, 1, 'Cireng', '1', 13200, '2020-11-01 02:35:17'),
-(116, 1, 'Leumeung,Hayam Bakakak,Cireng', '1,1,1', 57200, '2020-11-01 02:35:29'),
-(117, 1, 'Nasi Timbel,Nasi Liwet', '1,1', 33000, '2020-11-01 02:36:18'),
-(118, 5, 'Soto Mie', '1', 13200, '2020-11-01 02:45:31'),
-(119, 5, 'Soto Mie', '1', 13200, '2020-11-01 02:45:36'),
-(120, 5, 'Hayam Bakakak', '1', 27500, '2020-11-01 02:53:03'),
-(121, 1, 'Kerupuk Melarat,Kue Jojorong,Lepet', '1,1,1', 33000, '2020-11-01 05:44:08'),
-(122, 1, 'Kue Jojorong,Lepet', '1,1', 22000, '2020-11-01 05:46:40'),
-(123, 1, 'Lepet,Kerupuk Melarat,Opak,Nasi Timbel,Nasi Liwet,Kue Jojorong', '1,1,1,1,1,1', 71500, '2020-11-01 05:47:04'),
-(124, 1, 'Cireng,Hayam Bakakak,Leumeung', '1,1,1', 57200, '2020-11-01 06:36:13'),
-(125, 2, 'Cireng,Hayam Bakakak,Lepet', '1,1,1', 51700, '2020-11-01 11:46:02'),
-(126, 2, 'Cireng,Hayam Bakakak,Leumeung', '1,1,1', 57200, '2020-11-01 11:46:31'),
-(127, 1, 'Opak,Hayam Bakakak', '1,1', 33000, '2020-11-02 00:37:33'),
-(128, 1, 'Cireng,Hayam Bakakak,Leumeung,Kue Jojorong,Lepet,Kerupuk Melarat', '8,6,7,7,1,1', 485100, '2020-11-02 01:19:51'),
-(129, 1, 'Kue Jojorong,Lepet', '1,1', 22000, '2020-11-02 03:35:04'),
-(130, 1, 'Soto Mie', '1', 16500, '2020-11-02 03:46:44'),
-(131, 1, 'Soto Mie', '1', 16500, '2020-11-02 03:46:45');
+INSERT INTO `order_table` (`order_id`, `user_id`, `product_order`, `quality_order`, `total_price`, `order_date`, `invoices`) VALUES
+(94, 6, 'Lepet,Hayam Bakakak,Leumeung,Kue Jojorong', '1,1,1,1', 66000, '2020-10-31 13:35:49', ''),
+(95, 6, 'Hayam Bakakak,Leumeung', '1,1', 44000, '2020-10-31 13:36:48', ''),
+(96, 6, 'Cireng,Hayam Bakakak', '1,1', 40700, '2020-10-31 13:39:54', ''),
+(97, 6, 'Lepet', '1', 11000, '2020-10-31 13:40:51', ''),
+(98, 6, 'Leumeung', '1', 16500, '2020-10-31 13:45:38', ''),
+(99, 5, 'Hayam Bakakak,Leumeung,Kue Jojorong', '1,1,1', 55000, '2020-11-01 00:41:47', ''),
+(100, 5, 'Hayam Bakakak,Leumeung,Kue Jojorong', '1,1,1', 55000, '2020-11-01 00:43:21', ''),
+(101, 5, 'Hayam Bakakak,Leumeung,Kue Jojorong', '1,1,1', 55000, '2020-11-01 00:45:23', ''),
+(102, 5, 'Cireng,Hayam Bakakak,Leumeung,Kue Jojorong,Lepet,Kerupuk Melarat', '1,1,1,1,1,1', 90200, '2020-11-01 00:46:13', ''),
+(103, 5, 'Cireng', '1', 13200, '2020-11-01 00:47:57', ''),
+(104, 5, 'Hayam Bakakak', '1', 27500, '2020-11-01 01:01:25', ''),
+(105, 5, 'Hayam Bakakak,Leumeung', '1,1', 44000, '2020-11-01 01:03:34', ''),
+(106, 5, 'Cireng', '1', 13200, '2020-11-01 02:15:09', ''),
+(107, 5, 'Hayam Bakakak', '1', 27500, '2020-11-01 02:17:12', ''),
+(108, 5, 'Hayam Bakakak', '1', 27500, '2020-11-01 02:18:06', ''),
+(109, 5, 'Kue Jojorong', '1', 11000, '2020-11-01 02:18:15', ''),
+(110, 5, 'Lepet', '1', 11000, '2020-11-01 02:19:09', ''),
+(111, 5, 'Hayam Bakakak', '1', 27500, '2020-11-01 02:21:32', ''),
+(112, 5, 'Leumeung', '1', 16500, '2020-11-01 02:22:39', ''),
+(113, 5, 'Karedok,Soto Mie', '1,1', 24200, '2020-11-01 02:24:56', ''),
+(114, 5, 'Hayam Bakakak,Cireng,Leumeung,Kerupuk Melarat,Kue Jojorong,Lepet,Opak,Nasi Timbel,Karedok,Nasi Liwet,Soto Bandung,Soto Mie', '1,1,1,1,1,1,1,1,15,1,1,1', 314600, '2020-11-01 02:31:28', ''),
+(115, 1, 'Cireng', '1', 13200, '2020-11-01 02:35:17', ''),
+(116, 1, 'Leumeung,Hayam Bakakak,Cireng', '1,1,1', 57200, '2020-11-01 02:35:29', ''),
+(117, 1, 'Nasi Timbel,Nasi Liwet', '1,1', 33000, '2020-11-01 02:36:18', ''),
+(118, 5, 'Soto Mie', '1', 13200, '2020-11-01 02:45:31', ''),
+(119, 5, 'Soto Mie', '1', 13200, '2020-11-01 02:45:36', ''),
+(120, 5, 'Hayam Bakakak', '1', 27500, '2020-11-01 02:53:03', ''),
+(121, 1, 'Kerupuk Melarat,Kue Jojorong,Lepet', '1,1,1', 33000, '2020-11-01 05:44:08', ''),
+(122, 1, 'Kue Jojorong,Lepet', '1,1', 22000, '2020-11-01 05:46:40', ''),
+(123, 1, 'Lepet,Kerupuk Melarat,Opak,Nasi Timbel,Nasi Liwet,Kue Jojorong', '1,1,1,1,1,1', 71500, '2020-11-01 05:47:04', ''),
+(124, 1, 'Cireng,Hayam Bakakak,Leumeung', '1,1,1', 57200, '2020-11-01 06:36:13', ''),
+(125, 2, 'Cireng,Hayam Bakakak,Lepet', '1,1,1', 51700, '2020-11-01 11:46:02', ''),
+(126, 2, 'Cireng,Hayam Bakakak,Leumeung', '1,1,1', 57200, '2020-11-01 11:46:31', ''),
+(127, 1, 'Opak,Hayam Bakakak', '1,1', 33000, '2020-11-02 00:37:33', ''),
+(128, 1, 'Cireng,Hayam Bakakak,Leumeung,Kue Jojorong,Lepet,Kerupuk Melarat', '8,6,7,7,1,1', 485100, '2020-11-02 01:19:51', ''),
+(129, 1, 'Kue Jojorong,Lepet', '1,1', 22000, '2020-11-02 03:35:04', ''),
+(130, 1, 'Soto Mie', '1', 16500, '2020-11-02 03:46:44', ''),
+(131, 1, 'Soto Mie', '1', 16500, '2020-11-02 03:46:45', ''),
+(132, 1, 'Hayam Bakakak,Kerupuk Melarat,Leumeung,Kue Jojorong,Lepet', '1,13,10,10,10', 555500, '2020-11-08 06:40:59', ''),
+(133, 5, 'Opak', '1', 5500, '2020-11-18 00:34:46', '');
 
 -- --------------------------------------------------------
 
@@ -160,12 +163,13 @@ INSERT INTO `products_table` (`product_id`, `product_name`, `product_price`, `pr
 (2, 'Hayam Bakakak', '25000', 100, 'https://moondoggiesmusic.com/wp-content/uploads/2019/03/media-bogor-kuliner-grand-savero-ayam-bakar-madu.jpg', '2020-08-13 13:37:25', '2020-08-13 13:37:25', 1),
 (3, 'Leumeung', '15000', 30, 'http://makananoleholeh.com/wp-content/uploads/2017/05/Leumeung-Makanan-Khas-Banten.jpg', '2020-08-13 13:38:17', '2020-08-13 13:38:17', 2),
 (4, 'Kerupuk Melarat', '10000', 20, 'https://moondoggiesmusic.com/wp-content/uploads/2019/03/Kerupuk-Melarat.jpg', '2020-08-13 13:39:03', '2020-08-13 13:39:03', 1),
-(5, 'Lepet', '10000', 25, 'http://makananoleholeh.com/wp-content/uploads/2017/05/Lepet-Khas-Banten.jpg', '2020-08-13 13:39:41', '2020-08-13 13:39:41', 2),
+(5, 'Lepet', '10000', 25, 'http://makananoleholeh.com/wp-content/uploads/2017/05/Lepet-Khas-Banten.jpg', '2020-08-13 13:39:41', '2020-11-12 12:18:23', 2),
 (6, 'Kue Jojorong', '10000', 50, 'http://makananoleholeh.com/wp-content/uploads/2017/05/Kue-Jojorong-Khas-Banten.jpg', '2020-08-13 13:40:14', '2020-08-13 13:40:14', 2),
 (7, 'Opak', '5000', 100, 'http://makananoleholeh.com/wp-content/uploads/2017/05/Opak-Khas-Banten.jpg', '2020-08-13 13:40:50', '2020-08-13 13:40:50', 2),
-(22, 'Nasi Timbel', '15000', 0, '/images/1603505593883-image.jpg', '2020-10-24 02:13:14', '2020-10-24 02:13:14', 1),
-(23, 'Nasi Liwet', '15000', 0, '/images/1603506282903-image.jpg', '2020-10-24 02:24:42', '2020-10-24 02:24:42', 1),
-(27, 'Soto Mie', '15000', 0, '/images/1604288722987-image.jpg', '2020-11-02 03:45:24', '2020-11-02 03:45:24', 1);
+(40, 'Karedok', '13000', 0, '/images/1605224693382-image.jpg', '2020-11-12 03:36:49', '2020-11-12 23:44:53', 1),
+(41, 'Soto Bandung', '15000', 0, '/images/1605162643935-image.jpg', '2020-11-12 06:30:44', '2020-11-12 06:30:44', 1),
+(42, 'Soto Mie', '12000', 0, '/images/1605162934082-image.jpg', '2020-11-12 06:35:34', '2020-11-12 06:35:34', 1),
+(43, 'Nasi Liwet', '15000', 0, '/images/1605163058826-image.jpg', '2020-11-12 06:37:38', '2020-11-12 06:37:38', 1);
 
 -- --------------------------------------------------------
 
@@ -241,19 +245,19 @@ ALTER TABLE `history_table`
 -- AUTO_INCREMENT untuk tabel `order_table`
 --
 ALTER TABLE `order_table`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 
 --
 -- AUTO_INCREMENT untuk tabel `products_table`
 --
 ALTER TABLE `products_table`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
