@@ -32,8 +32,8 @@ Built with Node js, using ExpressJs framework and other libraries.
 3. Open the folder and type `npm install` for install dependencies
 4. If you haven't installed nodemon, please install it globally, type
    `npm install -g nodemon`
-5. Create database such as named **_e-dress_db_** and import database
-   **e-dress_db.sql** in folder sql to your new database
+5. Create database such as named **_products_db_** and import database
+   **products_db.sql** in folder sql to your new database
 6. Create file **_.env_** in root folder with the following contents :
 
 ```bash
